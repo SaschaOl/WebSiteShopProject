@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home page
+{% endblock %}
+
+{% block css %}
+    {{ url_for("static", filename = "home_page/css/home_page.css") }}
+{% endblock %}
+
+{% block header %}
+    <div class="top">
+        {% if is_auth == True %}
+            <a href="">{{ user_data["name"] }}</a>
+        {% else %}
+            <a href="/registration/">REGISTRATION</a>
+            <a href="/authorization/">AUTHORIZATION</a> 
+        {% endif %} 
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="title">
+        <p>HOME PAGE</p>
+    </div>
+{% endblock %}
