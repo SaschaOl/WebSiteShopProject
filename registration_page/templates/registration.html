@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block css %}
+    {{ url_for("static", filename = "registration_page/css/registration.css") }}
+{% endblock %}
+
+{% block js %}
+    {{ url_for("static", filename = "registration_page/js/script.js") }}
+{% endblock %}
+
+{% block header %}
+    <div class = "top">
+        <a href="/registration/">REGISTRATION</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    
+    <!-- Form used for registration of a new user -->
+    <form method="post", class="reg_div">
+        
+        <div class="entry">
+            <p>Login</p>
+            <input type="text", name="name", required>
+        </div>
+
+        <div class = "entry">
+            <p>Email</p>
+            <input type="text", name="email", required>
+        </div>
+        
+        <div class="entry">
+            <p>Password</p>
+            <input type="text", name="password", required>
+        </div>
+    
+        <div class="entry">
+            <p>Password confirmation</p>
+            <input type="text", name="password-rep", required>
+        </div>
+        
+        <div>
+            <button class="submit" type="submit">SEND</button>
+        </div>
+    </form>
+    {% if is_registred %}
+        <div class = "modal"> 
+            <p class = "modal_title">CONFIRMED</p> 
+            <div>
+                <p class = "arrow">→ </p>
+            <a href="/authorization/">AUTHORIZATION</a>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

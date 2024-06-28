@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block js %}
+    {{ url_for("static", filename = "basket_page/js/cart.js") }}
+{% endblock %}
+
+{% block css %}
+    {{ url_for("static", filename = "basket_page/css/cart.css") }}
+{% endblock %}
+
+{% block content %}
+    <main>
+        <p class="upper">
+            ВАШІ ДАНІ У ОБРОБЦІ<br>
+            КОНСУЛЬТАНТ ЗВ’ЯЖЕТЬСЯ З ВАМИ ДЛЯ ПІДТВЕРДЖЕННЯ ЗАМОВЛЕННЯ
+        </p>
+        <div class="content">
+            {% for product in list_cart %}
+                <div class = "body_basket">
+                    <div class = "product" id = "{{ product.id }}">
+                        <img class = "image" src="{{ url_for('static', filename = 'shop_page/image/products/' + product.picture) }}" alt="">
+                        <p class = "name"><b> {{ product.name }}</b></p>
+                        <p class = "text">0</p>
+                        <p class="price">{{ product.price - product.price * product.discount // 100 - 1}}<p class="money">грн</p></p>
+                    </div> 
+                </div>
+            {% endfor %}
+        </div>
+        <span class="lower">
+            <p>ЗАГАЛЬНА ВАРТІСТЬ ЗАМОВЛЕННЯ:</p>
+            <span class="cost">
+                <p class="final-price"></p>
+                <p class="money">грн</p>
+            </span>
+        </span>
+
+        <!-- Form used to cancel the order -->
+        <form method="post">
+            <button class="big_button">
+                ВІДМІНИТИ ЗАМОВЛЕННЯ
+            </button>
+        </form>
+    </main>
+{% endblock %}

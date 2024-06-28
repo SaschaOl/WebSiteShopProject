@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block js %}
+    {{ url_for("static", filename = "basket_page/js/basket.js") }}
+{% endblock %}
+
+{% block css %}
+    {{ url_for("static", filename = "basket_page/css/basket.css") }}
+{% endblock %}
+
+
+{% block content %}
+    <main>
+        <div class="paycheck">
+            {% if list_cart != [] %}
+                <button class = "big_button">ПЕРЕЙТИ ДО ОФОРМЛЕННЯ</button>
+            {% else %}
+                <button class = "big_button" disabled>ПЕРЕЙТИ ДО ОФОРМЛЕННЯ</button>
+            {% endif %}
+            <div class = "full-price">
+                <p class = "price-desc"></p>
+                <p class = "price-count"></p>
+                <p class = "price-currency">грн</p>
+            </div>
+            <div class = "discount"> 
+                <p class = "price-desc">Знижка</p>
+                <p class = "price-count">0</p>
+                <p class = "price-discount"></p>
+                <p class = "price-currency">грн</p>
+                
+            </div>
+            <div class = "final-price">
+                <p class = "price-desc">Загальна сума</p>
+                <p class = "price-count"></p>
+                <p class = "price-currency">грн</p>
+            </div>
+        </div>
+        <div class="content">
+            {% if list_cart != [] %}
+                {% for product in list_cart %}
+                    <div class = "body_basket">
+                        <div class = "product" id = "{{ product.id }}">
+                            <img class = "image" src="{{ url_for('static', filename = 'shop_page/image/products/' + product.picture) }}" alt="">
+                            
+                            <p class = "name"><b> {{ product.name }}</b></p>
+                            <div class = "text_basket">
+                                <button class = "minus"><b>-</b></button>
+                                <p class = "text">0</p>
+                                <button class = "plus">+</button>
+                            </div>
+                            
+                            <p class="price">{{ product.price - product.price * product.discount // 100 - 1}}<p class="money">грн</p></p>
+                            <var class = "var" hidden>{{ product.price }}</var>
+                        </div> 
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h2 class = "basket-empty">Кошик порожній</h2>
+            {% endif %}    
+        </div>
+
+        <!-- Form used to submit the order -->
+        <form class="form_checkout" method="post" style="display: none;">
+            <div class = "background-div-checkout">
+                <p class = "text_desing">ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</p>
+                <div class = "input-field-checkout">
+                    <p class = "select-name-choose">ІМ'Я: </p>
+                    <input type="text" name = "name" class = "input-product-checkout">
+                </div>
+                <div class = "input-field-checkout">
+                    <p class = "select-name-choose">ПРІЗВИЩЕ: </p>
+                    <input type="text" name = "surname" class = "input-product-checkout">
+                </div>
+                <div class = "input-field-checkout">
+                    <p class = "select-name-choose">ТЕЛЕФОН ЗАМОВНИКА: </p>
+                    <input type="text" name = "number_user" class = "input-product-checkout">
+                </div>
+                <div class = "input-field-checkout">
+                    <p class = "select-name-choose">EMAIL ЗАМОВНИКА: </p>
+                    <input type="text" name = "email_user" class = "input-product-checkout">
+                </div>
+                <div class = "input-field-checkout">
+                    <p class = "select-name-choose">МІСТО ОТРИМУВАЧА: </p>
+                    <input type="text" name = "city_user" class = "input-product-checkout">
+                </div>
+                <div class = "input-field-checkout">
+                    <p class = "select-name-choose">ВІДДІЛЕННЯ НОВОЇ ПОШТИ: </p>
+                    <input type="text" name = "nova_poshta" class = "input-product-checkout">
+                </div>
+                <div class = "input-field-checkout">
+                    <p class = "select-name-choose">ДОДАТКОВІ ПОБАЖАННЯ: </p>
+                    <textarea type="text" name = "additional_wishes" class = "input-product-checkout"></textarea>
+                </div>
+                <input type="hidden" name="price" class="price-input">
+                <input type="hidden" name = "products" class="product-input">
+
+                <button class = "submit-checkout" type = "submit" name="create_text">SEND</button>
+        </form>
+    </main>
+    
+   
+{% endblock %}

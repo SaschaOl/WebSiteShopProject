@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Admin
+{% endblock %}
+
+{% block css %}
+    {{ url_for("static", filename = "shop_page/css/shop.css") }}
+{% endblock %}
+
+{% block content %}
+    <script src="{{ url_for('static', filename = 'admin_page/js/main.js') }}" defer type="module"></script>
+    <link rel ="stylesheet" href= "{{ url_for('static', filename = 'admin_page/css/admin.css') }}">
+
+    <!-- Form used for changing the non file values of product -->
+    <form class= "modal_window text-edit" method="post" style="display: none;">
+        <div class = "div_modal">
+            <p class="p_modal">CHANGE TEXT:</p>
+            <input type = "text" class= "redact-input" name = "name" >
+            <input type="hidden" class = "var" name = "column">
+            <button class = "submit-button" type = "submit" name="id" >SEND</button>
+        </div>
+    </form>
+    <!-- Form used for changing the image value of product -->
+    <form class= "modal_window image-edit" method="post" style="display: none;" enctype = "multipart/form-data">
+        <div class = "div_modal ">           
+            <p class="p_modal">CHANGE IMAGE:</p>
+            <input type = "file" name = "image" class="image_input">
+            <button class = "submit-button" type = "submit" name="id">SEND</button>
+        </div>
+    </form>
+
+    <div class = "add-product-div">
+        <p class = "add-product-text">ДОДАТИ ПРОДУКТ</p>
+        <button class = "add-product-button">+</button>
+    </div>
+    <!-- Displaying a product for a product from the database -->
+    {% for product in products %}
+        <div class = "product">
+
+            <div class = "photo-div">
+                <img class = "photo" src="{{ url_for('static', filename = 'shop_page/image/products/' + product.picture) }}" alt="Image fone 5">
+                
+                <button class = "edit-image" id = "{{ product.id }}"><img src="{{ url_for('static', filename = 'shop_page/image/pencil.png') }}" alt="/"></button>
+            </div>
+           
+            <div class = "info">
+                <div class="name-div">
+                        <p class = "name">{{ product.name }}</p>
+                        <button class = "edit" id = "{{ product.id }}" name = "name"><img src="{{ url_for('static', filename = 'shop_page/image/pencil.png') }}" alt="/"></button>
+                </div>
+
+            
+                {% if product.discount > 0 %}
+                    <div class="olp-price-div">
+                        <p class="old-price">{{ product.price }} грн</p>
+                        <button class = "edit" id = "{{ product.id }}" name = "price"><img src="{{ url_for('static', filename = 'shop_page/image/pencil.png') }}" alt="/"></button>
+                    </div>
+                    <div class="discount-div">
+                        <p class="discount">Знижка {{ product.discount }}%</p>
+                        <button class = "edit" id = "{{ product.id }}" name = "discount"><img src="{{ url_for('static', filename = 'shop_page/image/pencil.png') }}" alt="/"></button>
+                    </div>
+                {% else %}
+                    <button class = "edit" id = "{{ product.id }}" name = "discount"><img src="{{ url_for('static', filename = 'shop_page/image/pencil.png') }}" alt="/"></button>
+                {% endif %}
+                <div class="price-count-div">
+                    <span class="price">   
+                        {% if product.discount > 0 %}
+                            <p class = "price-count">{{ product.price - product.price * product.discount // 100 - 1}}</p> 
+                            <!-- 2000 - 2000 * 20 // 100 -->
+                        {% else %}
+                            <p class = "price-count">{{ product.price }}</p> 
+                        {% endif %}
+                        
+                        <p class ="currency">грн</p>
+                
+                    </span>
+                    {% if product.discount == 0 %}
+                        <button class = "edit" id = "{{ product.id }}" name = "price"><img src="{{ url_for('static', filename = 'shop_page/image/pencil.png') }}" alt="/"></button>
+                    {% endif %}
+                </div>
+                <button class = "purchase-button" id = "{{ product.id }}">КУПИТИ</button>
+                <p class = "cap">ЄМНІСТЬ:</p>
+                <div class = "lower">
+                    <div class="memory-cap-div">
+                        <p class = "memory-cap">{{ product.memory_cap }}</p>
+                        <button class = "edit" id = "{{ product.id }}" name = "memory_cap"><img src="{{ url_for('static', filename = 'shop_page/image/pencil.png') }}" alt="/"></button>
+                    </div>
+                    <span>
+
+                        <!-- Form used to delete a product -->
+                        <form method = "post">
+                            <button class = "button-delete" name = "delete" value = "{{ product.id }}">
+                                <img class = "check" src="{{ url_for('static', filename = 'shop_page/image/delete.png') }}" alt="\/">
+                            </button>
+                        </form>
+                        <p class = "in-sale">ВИДАЛИТИ ТОВАР</p>
+                    </span>
+                </div>
+            </div>
+        </div>   
+    {% endfor %}
+        
+    <!-- From used to crate a product -->
+    <form class = "add-product" method="post" style="display: none;" enctype = "multipart/form-data">
+        <div class = "background-div">
+            <p class = "paragraf">NEW PRODUCT</p>
+            <div class = "input-field">
+                <p class = "select-name">IMAGE PRODUCT</p>
+                <input type="file" name = "image" class = "input-product input-product-image">
+            </div>
+            <div class = "input-field">
+                <p class = "select-name">NAME PRODUCT</p>
+                <input type="text" name = "name" class = "input-product">
+            </div>
+            <div class = "input-field">
+                <p class = "select-name">PRODUCT MEMORY CAPACITY</p>
+                <input type="text" name = "memory_cap" class = "input-product">
+            </div>
+            <div class = "input-field">
+                <p class = "select-name">PRICE PRODUCT</p>
+                <input type="text" name = "price" class = "input-product">
+            </div>
+            <div class = "input-field">
+                <p class = "select-name">DISCOUNT PRODUCT</p>
+                <input type="text" name = "discount" class = "input-product">
+            </div>
+            <div class = "input-field">
+                <p class = "select-name">COUNT PRODUCT</p>
+                <input type="text" name = "count" class = "input-product">
+                
+            </div>
+            <button class = "add-submit" type = "submit" name="create" value = 1>SEND</button>
+        </div>
+    </form>
+
+{% endblock %}

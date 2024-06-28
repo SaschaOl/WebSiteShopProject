@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Shop
+{% endblock %}
+
+{% block css %}
+    {{ url_for("static", filename = "shop_page/css/shop.css") }}
+{% endblock %}
+
+{% block js %}
+    {{ url_for("static", filename = "shop_page/js/shop.js") }}
+{% endblock %}
+
+{% block content %}
+    {% for product in products %}
+        <div class = "product">
+            <div class = "photo-div">
+                <img class = "photo" src="{{ url_for('static', filename = 'shop_page/image/products/' + product.picture) }}" alt="Image fone 5">
+            </div>
+            <div class = "info">
+                <div class="name-div">
+                    <p class = "name">{{ product.name }}</p>
+                    
+                </div>
+                {% if product.discount > 0 %}
+                    <div class="olp-price-div">
+                        <p class="old-price">{{ product.price }} грн</p>
+                        
+                    </div>
+                    <div class="discount-div">
+                        <p class="discount">Знижка {{ product.discount }}%</p>
+                        
+                    </div>
+                {% endif %}
+                <div class="price-count-div">
+                    <span class="price">
+                        {% if product.discount > 0 %}
+                            <p class = "price-count">{{ product.price - product.price * product.discount // 100 - 1}}</p> 
+                            <!-- 2000 - 2000 * 20 // 100 -->
+                        {% else %}
+                            <p class = "price-count">{{ product.price }}</p> 
+                        {% endif %}
+                        
+                        <p class ="currency">грн</p>
+                    </span>
+                </div>
+                <button class = "purchase-button" id = "{{ product.id }}">КУПИТИ</button>
+                <p class = "cap">ЄМНІСТЬ:</p>
+                <div class = "lower">
+                    <div class="memory-cap-div">
+                        <p class = "memory-cap">{{ product.memory_cap }}</p>  
+                    </div>
+                    <span>
+                        <img class = "check" src="{{ url_for('static', filename = 'shop_page/image/check.png') }}" alt="\/"> 
+                        <p class = "in-sale">ТОВАР В НАЯВНОСТІ</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

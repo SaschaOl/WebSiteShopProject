@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Authorization
+{% endblock %}
+
+{% block css %}
+    {{ url_for("static", filename = "authorization_page/css/authorization.css") }}
+{% endblock %}
+
+{% block js %}
+    {{ url_for("static", filename = "authorization_page/js/script.js") }}
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+
+{% block content %}
+    
+    <!-- Form used to get data from use for authorization -->
+    <form class = "auth-container" method="post">
+        <div class="entry">
+            <p>Login or email</p>
+            <input type="text" name="name" required>
+        </div>
+        <div class="entry">
+            <p>Password</p>
+            <input type="text" name="password" required>
+        </div>
+        <button class="submit" type="submit">Submit</button>
+    </form>
+    
+    {% if not password_valid %}
+    <!-- Modal window, that diplays if login data is not correct -->
+    <div class = "modal"> 
+        <p class = "modal_title">YOU ARE NOT REGISTRATED</p> 
+        <div>
+            <p class = "arrow">→ </p>
+           <a href="/registration/">REGISTRATION</a>
+        </div>
+    </div>
+    {% endif %}
+
+    
+{% endblock %}

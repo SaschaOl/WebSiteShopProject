@@ -1,0 +1,69 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %} {% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'Shop/css/style.css') }}">
+        <link rel="stylesheet" href="{% block css %}{% endblock %}">
+        <script defer src = "{% block js %}{% endblock %}"></script>
+        <script defer src = "{{ url_for('static', filename = 'Shop/js/script.js') }}"></script>
+    </head>
+    <header>
+
+        
+        <div class = "header">
+            {% if is_auth %}
+                {% if page == "home" %}
+                    <a class="main-link page" href="/">HOME</a>
+                {% else %}
+                    <a class="main-link " href="/">HOME</a>
+                {% endif %}
+                
+                {% if page == "shop" %}
+                    <a class="main-link page" href="/shop/">SHOP</a> 
+                {% else %}
+                    <a class="main-link" href="/shop/">SHOP</a> 
+                {% endif %}
+                
+                {% if page == "basket" %}
+                    <a class="main-link basket page" href="/basket/">CART <p>0</p></a>
+                {% else %}
+                    <a class="main-link basket" href="/basket/">CART <p>0</p></a> 
+                {% endif %}
+            
+                {% if page == "contacts" %}
+                    <a class = "main-link page" href="/contacts/">CONTACTS</a>
+                {% else %}
+                    <a class = "main-link" href="/contacts/">CONTACTS </a>
+                {% endif %}
+
+                {% if is_admin %}
+                    {% if page == "admin" %}
+                        <a class="main-link admin page" href="/admin/">ADMIN</a>
+                    {% else %}
+                        <a class="main-link" href="/admin/">ADMIN</a> 
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            <div class="top">
+                {% if is_auth %}
+                    <p>{{ user_data["name"] }}</p>
+                {% else %}
+                    <a href="/registration/">REGISTRATION</a>
+                    <a href="/authorization/">AUTHORIZATION</a> 
+                {% endif %} 
+            </div>
+        </div>
+        
+    </header>
+    <body>
+        
+        {% block content %}
+        
+        {% endblock %}
+
+    </body>
+</html>
+
+
+

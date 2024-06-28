@@ -1,0 +1,207 @@
+
+
+.modal_window{
+    background-color: rgba(255,255,255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+}
+
+.div_modal{
+    border: 3px solid black;
+    border-radius: 25px;
+    width: 700px;
+    height: 350px;
+    background-color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+.div_modal *{
+    margin: 10px;
+}
+
+.redact-input{
+    width: 450px;
+    height: 74px;
+    border: 2px solid black;
+    border-radius: 15px;
+    font-size: 25px;
+    
+}
+
+.submit-button{
+    width: 446px;
+    height: 51px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: underline;
+    background-color: white;
+    font-size: 25px;
+    border: none;
+}
+
+
+.p_modal{
+    width: 446px;
+    height: 30px;
+    font-size: 25px;
+    display: flex;
+    justify-content: left;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.edit-image {
+    border: 3px solid black;
+    border-radius: 10px;
+    height: 30px;
+    width: 30px;
+    background-color: #D1D8DB;
+}
+
+
+.image_input {
+    width: 360px;
+    height: 55px;
+    border: 2px solid black; 
+    border-radius: 10px;
+}
+
+.image_input::file-selector-button {
+    width: 220px;
+    height: 46px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1px, 31px, 1px, 31px;
+    margin: 3;
+    font-size: 25;
+    font-weight: 700;
+}
+
+.background-div{
+    width: 500px;
+    height: 650px;
+    border: 3px solid black;
+    border-radius: 25px;
+    padding: 30px, 10px, 10px, 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.input-product {
+    width: 360px;
+    height: 55px;
+    border: 2px solid black; 
+    border-radius: 10px;
+
+}
+
+.add-submit {
+    width: 200px;
+    size: 25px;
+    align-items: center;
+    text-decoration: underline;
+    border: 0;
+    background-color: white;
+    font-size: 20px;
+}
+
+.add-product {
+    background-color: rgba(255,255,255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+}
+
+.paragraf {
+    width: 470px;
+    height: 34px;
+    font-weight: 700;
+    size: 28px;
+    font-size: 28px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: black;
+    margin: 0;
+}
+
+.select-name {
+    width: 446px;
+    height: 27px;
+    font-weight: 400;
+    size: 22px;
+    color: black;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.input-product-image::file-selector-button {
+    width: 220px;
+    height: 46px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1px, 31px, 1px, 31px;
+    margin: 3;
+    font-size: 25;
+    font-weight: 700;
+}
+
+.input-field {
+    width: 360px;
+    height: 80px;
+    margin: 5;
+}
+
+.add-product-button {
+    width: 45px;
+    height: 45px;
+    top: 16px;
+    left: 1271px;
+    border: 3px solid black;
+    border-radius: 15px;
+    background-color: #D1D8DB;
+    font-size: 30px;
+}
+
+.add-product-text {
+    width: 250px;
+    height: 35px;
+    top: 21.5px;
+    left: 1098px;
+    font-family: Roboto;
+    font-weight: 700;
+    text-align: right;
+    color: black;
+    margin: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.add-product-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+.button-delete {
+    background-color: white;
+    border: none;
+}
